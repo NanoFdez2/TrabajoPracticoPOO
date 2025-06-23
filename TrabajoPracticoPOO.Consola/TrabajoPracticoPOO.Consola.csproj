@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TrabajoPracticoPOO.Entidades\TrabajoPracticoPOO.Entidades.csproj" />
+    <ProjectReference Include="..\TrabajoPracticoPOO.Utilidades\TrabajoPracticoPOO.Utilidades.csproj" />
+  </ItemGroup>
+
 </Project>

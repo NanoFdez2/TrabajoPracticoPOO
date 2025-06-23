@@ -29,11 +29,12 @@ namespace TrabajoPracticoPOO.Entidades
             if (string.IsNullOrWhiteSpace(nombre))
                 yield return new ValidationResult("El nombre no puede ser nulo ni vacio!!!");
 
-            if (!Regex.IsMatch(DNI ?? "", @"^\d{8}$")) ;
+            if (!Regex.IsMatch(DNI ?? "", @"^\d{8}$")) 
             yield return new ValidationResult("El DNI debe ser de 8 digitos!");
 
             if (fechaAlta > DateTime.Now)
                 yield return new ValidationResult("La fecha de alta no puede ser mayor a la fecha actual");
+
         }
     }
 }

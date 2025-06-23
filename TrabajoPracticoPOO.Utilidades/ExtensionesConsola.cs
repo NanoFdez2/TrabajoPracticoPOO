@@ -22,15 +22,20 @@ namespace TrabajoPracticoPOO.Utilidades
             {
                 Console.Write(mensajePantalla);
                 texto = Console.ReadLine();
-                if (!string.IsNullOrEmpty(texto) && esRequerido)
+                if (esRequerido)
                 {
-                    return texto;
+                    if (!string.IsNullOrEmpty(texto))
+                        return texto;
+                    Console.WriteLine("El dato es requerido...Reintentar");
+                    Console.ReadLine();
                 }
-                Console.WriteLine("El dato es requerido...Reintentar");
-                Console.ReadLine();
+                else
+                {
+                    return texto ?? string.Empty;
+                }
             } while (true);
-
         }
+            
         /// <summary>
         /// Método estático para pedir un entero entre dos extremos
         /// </summary>
@@ -199,8 +204,8 @@ namespace TrabajoPracticoPOO.Utilidades
             do
             {
                 nro = PedirString(mensaje);
-                string formato1 = @"^d{8}$";
-                string formato2 = @"^d{7}$";
+                string formato1 = @"^\d{8}$";
+                string formato2 = @"^\d{7}$";
                 if (Regex.IsMatch(nro!, formato1) || Regex.IsMatch(nro!, formato2))
                 {
                     return int.Parse(nro);
