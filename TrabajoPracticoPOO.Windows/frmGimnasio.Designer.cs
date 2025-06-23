@@ -38,6 +38,10 @@
             toolStripSeparator1 = new ToolStripSeparator();
             tsbSalir = new ToolStripButton();
             dgvDatos = new DataGridView();
+            colNombre = new DataGridViewTextBoxColumn();
+            colDNI = new DataGridViewTextBoxColumn();
+            colTipoCliente = new DataGridViewTextBoxColumn();
+            colLocalidad = new DataGridViewTextBoxColumn();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDatos).BeginInit();
             SuspendLayout();
@@ -59,6 +63,7 @@
             tsbAgregar.Size = new Size(63, 35);
             tsbAgregar.Text = "AGREGAR";
             tsbAgregar.TextImageRelation = TextImageRelation.ImageAboveText;
+            tsbAgregar.Click += tsbAgregar_Click;
             // 
             // tsbEditar
             // 
@@ -68,6 +73,7 @@
             tsbEditar.Size = new Size(49, 35);
             tsbEditar.Text = "EDITAR";
             tsbEditar.TextImageRelation = TextImageRelation.ImageAboveText;
+            tsbEditar.Click += tsbEditar_Click;
             // 
             // tsbBorrar
             // 
@@ -77,6 +83,7 @@
             tsbBorrar.Size = new Size(56, 35);
             tsbBorrar.Text = "BORRAR";
             tsbBorrar.TextImageRelation = TextImageRelation.ImageAboveText;
+            tsbBorrar.Click += tsbBorrar_Click;
             // 
             // tsbActualizar
             // 
@@ -86,6 +93,7 @@
             tsbActualizar.Size = new Size(81, 35);
             tsbActualizar.Text = "ACTUALIZAR";
             tsbActualizar.TextImageRelation = TextImageRelation.ImageAboveText;
+            tsbActualizar.Click += tsbActualizar_Click;
             // 
             // tsbFiltrar
             // 
@@ -95,6 +103,7 @@
             tsbFiltrar.Size = new Size(54, 35);
             tsbFiltrar.Text = "FILTRAR";
             tsbFiltrar.TextImageRelation = TextImageRelation.ImageAboveText;
+            tsbFiltrar.Click += tsbFiltrar_Click;
             // 
             // toolStripSeparator1
             // 
@@ -109,15 +118,58 @@
             tsbSalir.Size = new Size(41, 35);
             tsbSalir.Text = "SALIR";
             tsbSalir.TextImageRelation = TextImageRelation.ImageAboveText;
+            tsbSalir.Click += tsbSalir_Click;
             // 
             // dgvDatos
             // 
+            dgvDatos.AllowUserToResizeColumns = false;
+            dgvDatos.AllowUserToResizeRows = false;
+            dgvDatos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvDatos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvDatos.Columns.AddRange(new DataGridViewColumn[] { colNombre, colDNI, colTipoCliente, colLocalidad });
             dgvDatos.Dock = DockStyle.Fill;
             dgvDatos.Location = new Point(0, 38);
+            dgvDatos.MultiSelect = false;
             dgvDatos.Name = "dgvDatos";
+            dgvDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvDatos.Size = new Size(800, 412);
             dgvDatos.TabIndex = 1;
+            // 
+            // colNombre
+            // 
+            colNombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colNombre.HeaderText = "Nombre";
+            colNombre.Name = "colNombre";
+            colNombre.ReadOnly = true;
+            colNombre.Resizable = DataGridViewTriState.False;
+            colNombre.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colDNI
+            // 
+            colDNI.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colDNI.HeaderText = "DNI";
+            colDNI.Name = "colDNI";
+            colDNI.ReadOnly = true;
+            colDNI.Resizable = DataGridViewTriState.False;
+            colDNI.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colTipoCliente
+            // 
+            colTipoCliente.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colTipoCliente.HeaderText = "Tipo de Cliente";
+            colTipoCliente.Name = "colTipoCliente";
+            colTipoCliente.ReadOnly = true;
+            colTipoCliente.Resizable = DataGridViewTriState.False;
+            colTipoCliente.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colLocalidad
+            // 
+            colLocalidad.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colLocalidad.HeaderText = "Localidad";
+            colLocalidad.Name = "colLocalidad";
+            colLocalidad.ReadOnly = true;
+            colLocalidad.Resizable = DataGridViewTriState.False;
+            colLocalidad.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // frmGimnasio
             // 
@@ -128,6 +180,7 @@
             Controls.Add(toolStrip1);
             Name = "frmGimnasio";
             Text = "frmGimnasio";
+            Load += frmGimnasio_Load;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDatos).EndInit();
@@ -146,5 +199,9 @@
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripButton tsbSalir;
         private DataGridView dgvDatos;
+        private DataGridViewTextBoxColumn colNombre;
+        private DataGridViewTextBoxColumn colDNI;
+        private DataGridViewTextBoxColumn colTipoCliente;
+        private DataGridViewTextBoxColumn colLocalidad;
     }
 }
