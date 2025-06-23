@@ -8,12 +8,16 @@ namespace TrabajoPracticoPOO.Entidades
 {
     public class SocioPremium : Cliente
     {
-
         public SocioPremium()
         {
-            cantidadDias = 5;
-            costoMembresia = 35000 + 10000;
-            servicio = Servicio.GimnasioTrainer;
+            
+        }
+        public SocioPremium(string nombre, string dni, DateTime fechaAlta, Localidad localidad, Servicio serv)
+            : base(nombre, dni, fechaAlta, localidad, serv)
+        {
+            costoMembresia = 35000 + 10000; // Personal trainer incluido
+            cantidadDias = 5; // 5 veces por semana
+            servicio = Servicio.GimnasioTrainer; // Siempre incluye trainer
         }
         public override decimal CalcularGastoMensual()
         {

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TrabajoPracticoPOO.Entidades
 {
@@ -22,6 +23,20 @@ namespace TrabajoPracticoPOO.Entidades
         public Servicio servicio { get; set; }
 
         public abstract decimal CalcularGastoMensual();
+
+        protected Cliente()
+        {
+            
+        }
+
+        public Cliente(string Nombre, string dni, DateTime FechaAlta, Localidad ciudad, Servicio serv)
+        {
+            nombre = Nombre;
+            DNI = dni;
+            fechaAlta = FechaAlta;
+            localidad = ciudad;
+            servicio = serv;
+        }
 
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

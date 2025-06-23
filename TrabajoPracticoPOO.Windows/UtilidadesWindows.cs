@@ -17,17 +17,26 @@ namespace TrabajoPracticoPOO.Utilidades
         }
 
         public static void CargarCombo<T>(ComboBox combo, List<T> datos, string displayMember = null, string valueMember = null)
-            
         {
             if (combo == null) return;
 
-            combo.DataSource = datos;
+            // Si los datos son de tipo string, los asignamos directamente como DataSource
+            if (typeof(T) == typeof(string))
+            {
+                combo.DataSource = datos;
+            }
+            else
+            {
+                // Si no son strings, se asigna el DataSource como si fuera un objeto
+                combo.DataSource = datos;
 
-            if (!string.IsNullOrEmpty(displayMember))
-                combo.DisplayMember = displayMember;
+                if (!string.IsNullOrEmpty(displayMember))
+                    combo.DisplayMember = displayMember;
 
-            if (!string.IsNullOrEmpty(valueMember))
-                combo.ValueMember = valueMember;
+                if (!string.IsNullOrEmpty(valueMember))
+                    combo.ValueMember = valueMember;
+            }
         }
+
     }
 }
