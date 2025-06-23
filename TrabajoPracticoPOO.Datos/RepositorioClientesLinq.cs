@@ -56,6 +56,14 @@ namespace TrabajoPracticoPOO.Datos
         {
             return clientes.ToList();
         }
+
+        public  bool EliminarCliente(string dni)
+        {
+            var c = clientes.FirstOrDefault(x => x.DNI == dni);
+            if (c == null) return false;
+            clientes.Remove(c);
+            return true;
+        }
     }
 }
 

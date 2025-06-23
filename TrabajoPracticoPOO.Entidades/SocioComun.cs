@@ -9,13 +9,16 @@ namespace TrabajoPracticoPOO.Entidades
     public class SocioComun : Cliente
     {
 
-
         public SocioComun()
         {
-            cantidadDias = 3;
+            
+        }
+        public SocioComun(string nombre, string dni, DateTime fechaAlta, Localidad localidad, Servicio serv)
+        : base(nombre, dni, fechaAlta, localidad, serv)
+        {
             costoMembresia = 35000;
-            servicio = Servicio.Gimnasio;
-
+            cantidadDias = 3; // 3 veces por semana
+            servicio = Servicio.Gimnasio; // Siempre acceso solo al gimnasio
         }
         public override decimal CalcularGastoMensual()
         {

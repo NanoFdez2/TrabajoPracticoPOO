@@ -9,42 +9,45 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrabajoPracticoPOO.Datos;
 using TrabajoPracticoPOO.Entidades;
+using TrabajoPracticoPOO.Utilidades;
 
 namespace TrabajoPracticoPOO.Windows
 {
     public partial class frmGimnasio : Form
     {
-        private RepositorioClientesOperadores? gestor;
+     
         private RepositorioClientesLinq? gestorLinq;
+        private List<Cliente> clientes = new List<Cliente>();
         public frmGimnasio()
         {
             InitializeComponent();
-            gestor = new RepositorioClientesOperadores();
+            
             gestorLinq = new RepositorioClientesLinq();
+            ActualizarGrilla();
         }
+        //private void CargarClientes()
+        //{
+        //    UtilidadesWindows.CargarGrid(dgvDatos, clientes);  // Cargar la lista de clientes en el DataGridView
+        //}
 
         private void tsbAgregar_Click(object sender, EventArgs e)
         {
-            frmGimnasioAE frm = new frmGimnasioAE() { Text = "Agregar Cliente" };
-            DialogResult dr = frm.ShowDialog(this);
-            if (dr == DialogResult.Cancel) return;
+            frmGimnasioAE frm = new frmGimnasioAE();
 
-            Cliente cliente = frm.GetCliente();
-            if (cliente == null)
+            if (frm.ShowDialog() == DialogResult.OK)
             {
-                var r = new DataGridViewRow();
-                r.CreateCells(dgvDatos);
-                SetearFila(r, cliente);
-                AgregarFila(r);
+                Cliente nuevoCliente = frm.GetCliente();
 
+                // ✅ Valido después de obtener el cliente desde el frmAE
+                if (clientes.Any(c => c.DNI == nuevoCliente.DNI))
+                {
+                    MessageBox.Show("Ya existe un cliente con ese DNI.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                clientes.Add(nuevoCliente);
+                ActualizarGrilla(); // Refrescar la grilla
             }
-            else
-            {
-                MessageBox.Show("El cliente ya existe!!!");
-            }
-
-            ActualizarGrilla();
-
         }
 
         private void ActualizarGrilla()
@@ -52,12 +55,8 @@ namespace TrabajoPracticoPOO.Windows
             dgvDatos.Rows.Clear();
 
 
-            var lista = gestorLinq.ListarPersonal();
-            if (lista == null || lista.Count == 0)
-            {
-                MessageBox.Show("No hay clientes para mostrar.");
-                return;
-            }
+            var lista = gestorLinq.ListarTodos();
+
             foreach (var cliente in lista)
             {
                 var r = new DataGridViewRow();
@@ -66,6 +65,13 @@ namespace TrabajoPracticoPOO.Windows
                 AgregarFila(r);
 
             }
+
+            if (lista == null || lista.Count == 0)
+            {
+                MessageBox.Show("No hay clientes para mostrar.");
+                return;
+            }
+           
         }
 
         private void AgregarFila(DataGridViewRow r)
@@ -77,8 +83,9 @@ namespace TrabajoPracticoPOO.Windows
         {
             r.Cells[0].Value = cliente.ToString();
             r.Cells[1].Value = cliente.DNI;
-            r.Cells[2].Value = cliente.fechaAlta.ToShortDateString();
+            r.Cells[2].Value = cliente.GetType().Name;
             r.Cells[3].Value = cliente.localidad.ToString();
+            r.Cells[4].Value = cliente.fechaAlta.ToShortDateString();
             r.Tag = cliente;
         }
 
@@ -105,10 +112,10 @@ namespace TrabajoPracticoPOO.Windows
 
             if (resultado == DialogResult.Yes)
             {
-                var clienteABorrar = new SocioComun { DNI = dni };
-                gestor = gestor - clienteABorrar;
-                ActualizarGrilla();
-                MessageBox.Show("Cliente eliminada!!!");
+                if (RepositorioClientesLinq.EliminarCliente(dni))
+                    ActualizarGrilla();
+                else
+                    MessageBox.Show("Vehículo no encontrado.");
             }
         }
 
@@ -136,9 +143,10 @@ namespace TrabajoPracticoPOO.Windows
             }
 
 
-            var frmEditar = new frmGimnasioAE();
+             frmGimnasioAE frm = new frmGimnasioAE();
+            frm.CargarCliente(cliente);
 
-            if (frmEditar.ShowDialog() == DialogResult.OK)
+            if (frm.ShowDialog() == DialogResult.OK)
             {
 
                 ActualizarGrilla();
@@ -154,16 +162,10 @@ namespace TrabajoPracticoPOO.Windows
 
         private void frmGimnasio_Load(object sender, EventArgs e)
         {
-            //gestorLinq.AgregarCliente(new SocioPremium()
-            //{
-            //    nombre = "Gonzalo Martinez",
-            //    DNI = "31442511",
-            //    fechaAlta = DateTime.Today,
-            //    localidad = Localidad.Catamarca,
 
-            //});
 
-            //ActualizarGrilla();
+            gestorLinq = new RepositorioClientesLinq();
+            ActualizarGrilla();
 
         }
     }
