@@ -6,12 +6,6 @@ namespace TrabajoPracticoPOO.Datos
     public class RepositorioClientesLinq
     {
         private List<Cliente> clientes;
-
-        //public RepositorioClientesLinq()
-        //{
-        //    clientes = new List<Cliente>();
-        //}
-
         public void AgregarCliente(Cliente cliente)
         {
 

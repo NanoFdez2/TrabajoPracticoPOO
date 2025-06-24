@@ -42,14 +42,12 @@ namespace TrabajoPracticoPOO.Utilidades
         {
             if (combo == null) return;
 
-            // Si los datos son de tipo string, los asignamos directamente como DataSource
             if (typeof(T) == typeof(string))
             {
                 combo.DataSource = datos;
             }
             else
             {
-                // Si no son strings, se asigna el DataSource como si fuera un objeto
                 combo.DataSource = datos;
 
                 if (!string.IsNullOrEmpty(displayMember))

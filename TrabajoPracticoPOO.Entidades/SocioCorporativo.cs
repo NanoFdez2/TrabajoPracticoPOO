@@ -15,9 +15,9 @@ namespace TrabajoPracticoPOO.Entidades
         public SocioCorporativo(string nombre, string dni, DateTime fechaAlta, Localidad localidad, Servicio serv)
         : base(nombre, dni, fechaAlta, localidad, serv)
         {
-            costoMembresia = 35000 + 20000; // Spa incluido
-            cantidadDias = 6; // 6 veces por semana
-            servicio = Servicio.GimnasioTrainerSpa; // Siempre incluye spa
+            costoMembresia = 35000 + 20000;
+            cantidadDias = 6;
+            servicio = Servicio.GimnasioTrainerSpa;
         }
 
         public override decimal CalcularGastoMensual()
