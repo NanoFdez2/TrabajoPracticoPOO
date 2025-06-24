@@ -16,7 +16,7 @@ namespace TrabajoPracticoPOO.Windows
     public partial class frmGimnasioAE : Form
     {
         public Cliente? cliente;
-       
+
 
 
         public frmGimnasioAE()
@@ -33,7 +33,7 @@ namespace TrabajoPracticoPOO.Windows
 
         public frmGimnasioAE(Cliente cliente)
         {
-            InitializeComponent();  
+            InitializeComponent();
             this.cliente = cliente;
             CargarCliente(cliente);  // Cargar los datos del cliente para editar
         }
@@ -48,7 +48,8 @@ namespace TrabajoPracticoPOO.Windows
             txtDNI.Text = cliente.DNI;
             localidadCbo.SelectedItem = cliente.localidad;
             tipoClienteCbo.SelectedItem = cliente.servicio;
-            dtpFechaAlta.Value = cliente.fechaAlta; 
+            dtpFechaAlta.Value = cliente.fechaAlta;
+            txtDNI.ReadOnly = true;
         }
 
 
@@ -157,6 +158,11 @@ namespace TrabajoPracticoPOO.Windows
             }
 
             return esValido;
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
