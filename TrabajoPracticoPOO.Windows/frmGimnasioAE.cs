@@ -62,7 +62,7 @@ namespace TrabajoPracticoPOO.Windows
             {
                 if (cliente == null)
                 {
-                    // Crear nuevo cliente
+                    
                     string nombre = txtNombre.Text.Trim();
                     string dni = txtDNI.Text.Trim();
                     DateTime fechaAlta = dtpFechaAlta.Value;
