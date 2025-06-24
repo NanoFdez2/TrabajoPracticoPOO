@@ -20,15 +20,10 @@ namespace TrabajoPracticoPOO.Windows
         private List<Cliente> clientes = new List<Cliente>();
         public frmGimnasio()
         {
-            InitializeComponent();
-            
+            InitializeComponent();            
             gestorLinq = new RepositorioClientesLinq();
             ActualizarGrilla();
         }
-        //private void CargarClientes()
-        //{
-        //    UtilidadesWindows.CargarGrid(dgvDatos, clientes);  // Cargar la lista de clientes en el DataGridView
-        //}
 
         private void tsbAgregar_Click(object sender, EventArgs e)
         {
@@ -37,21 +32,23 @@ namespace TrabajoPracticoPOO.Windows
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 Cliente nuevoCliente = frm.GetCliente();
-
-                // ✅ Valido después de obtener el cliente desde el frmAE
-                if (clientes.Any(c => c.DNI == nuevoCliente.DNI))
+                if (nuevoCliente != null)
                 {
-                    MessageBox.Show("Ya existe un cliente con ese DNI.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                    if (gestorLinq.ListarTodos().Any(c => c.DNI == nuevoCliente.DNI))
+                    {
+                        MessageBox.Show("Ya existe un cliente con ese DNI.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
 
-                clientes.Add(nuevoCliente);
-                ActualizarGrilla(); // Refrescar la grilla
+                    gestorLinq.AgregarCliente(nuevoCliente);
+                    ActualizarGrilla();
+                }
             }
         }
 
         private void ActualizarGrilla()
         {
+
             dgvDatos.Rows.Clear();
 
 
@@ -66,12 +63,7 @@ namespace TrabajoPracticoPOO.Windows
 
             }
 
-            if (lista == null || lista.Count == 0)
-            {
-                MessageBox.Show("No hay clientes para mostrar.");
-                return;
-            }
-           
+
         }
 
         private void AgregarFila(DataGridViewRow r)
@@ -81,7 +73,7 @@ namespace TrabajoPracticoPOO.Windows
 
         private void SetearFila(DataGridViewRow r, Cliente? cliente)
         {
-            r.Cells[0].Value = cliente.ToString();
+            r.Cells[0].Value = cliente.nombre;
             r.Cells[1].Value = cliente.DNI;
             r.Cells[2].Value = cliente.GetType().Name;
             r.Cells[3].Value = cliente.localidad.ToString();
@@ -96,27 +88,31 @@ namespace TrabajoPracticoPOO.Windows
 
         private void tsbBorrar_Click(object sender, EventArgs e)
         {
-            //if (dgvDatos.CurrentRow == null)
-            //{
-            //    MessageBox.Show("Elija una fila para borrar!");
-            //    return;
-            //}
-            //string dni = dgvDatos.CurrentRow.Cells["colDNI"].Value.ToString()!;
-            //string nombre = dgvDatos.CurrentRow.Cells["colNombre"].Value.ToString()!;
+            if (dgvDatos.CurrentRow == null)
+            {
+                MessageBox.Show("Elija una fila para borrar!");
+                return;
+            }
+            string dni = dgvDatos.CurrentRow.Cells["colDNI"].Value.ToString()!;
+            string nombre = dgvDatos.CurrentRow.Cells["colNombre"].Value.ToString()!;
 
-            //var resultado = MessageBox.Show(
-            //    $"¿Seguro que desea borrar a {nombre}?",
-            //    "Confirmar borrado",
-            //    MessageBoxButtons.YesNo,
-            //    MessageBoxIcon.Warning);
+            var resultado = MessageBox.Show(
+                $"¿Seguro que desea borrar a {nombre}?",
+                "Confirmar borrado",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
 
-            //if (resultado == DialogResult.Yes)
-            //{
-            //    if (RepositorioClientesLinq.EliminarCliente(dni))
-            //        ActualizarGrilla();
-            //    else
-            //        MessageBox.Show("Vehículo no encontrado.");
-            //}
+            if (resultado == DialogResult.Yes)
+            {
+                if (gestorLinq != null && gestorLinq.EliminarCliente(dni))
+                {
+                    ActualizarGrilla();
+                }
+                else
+                {
+                    MessageBox.Show("Cliente no encontrado.");
+                }
+            }
         }
 
         private void tsbActualizar_Click(object sender, EventArgs e)
@@ -156,7 +152,51 @@ namespace TrabajoPracticoPOO.Windows
 
         private void tsbFiltrar_Click(object sender, EventArgs e)
         {
-            ActualizarGrilla();
+            if (cboFiltrar.SelectedItem == null)
+            {
+                MessageBox.Show("Seleccione un tipo de cliente para filtrar.");
+                return;
+            }
+
+            string tipoSeleccionado = cboFiltrar.SelectedItem as string;
+            if (string.IsNullOrWhiteSpace(tipoSeleccionado))
+            {
+                MessageBox.Show("Seleccione un tipo de cliente para filtrar.");
+                return;
+            }
+
+            Type tipoCliente = tipoSeleccionado switch
+            {
+                "Socio Comun" => typeof(SocioComun),
+                "Socio Premium" => typeof(SocioPremium),
+                "Socio Corporativo" => typeof(SocioCorporativo),
+                "Todos" => null,
+                _ => null
+            };
+
+            if (tipoCliente == null && tipoSeleccionado != "Todos")
+            {
+                MessageBox.Show("Tipo de cliente no válido.");
+                return;
+            }
+
+            List<Cliente> listaFiltrada = tipoCliente == null
+                ? gestorLinq.ListarTodos()
+                : gestorLinq.BuscarPorTipo(tipoCliente);
+
+            dgvDatos.Rows.Clear();
+            foreach (var cliente in listaFiltrada)
+            {
+                var r = new DataGridViewRow();
+                r.CreateCells(dgvDatos);
+                SetearFila(r, cliente);
+                AgregarFila(r);
+            }
+
+            if (listaFiltrada.Count == 0)
+            {
+                MessageBox.Show("No hay clientes de ese tipo para mostrar.");
+            }
 
         }
 
@@ -166,7 +206,12 @@ namespace TrabajoPracticoPOO.Windows
 
             gestorLinq = new RepositorioClientesLinq();
             ActualizarGrilla();
-
+            cboFiltrar.Items.Clear();
+            cboFiltrar.Items.Add("Todos");
+            cboFiltrar.Items.Add("Socio Comun");
+            cboFiltrar.Items.Add("Socio Premium");
+            cboFiltrar.Items.Add("Socio Corporativo");
+            cboFiltrar.SelectedIndex = 0;
         }
     }
 }

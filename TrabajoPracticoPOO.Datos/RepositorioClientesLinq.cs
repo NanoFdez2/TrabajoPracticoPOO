@@ -1,4 +1,5 @@
-﻿using TrabajoPracticoPOO.Entidades;
+﻿using System.Text.RegularExpressions;
+using TrabajoPracticoPOO.Entidades;
 
 namespace TrabajoPracticoPOO.Datos
 {
@@ -6,10 +7,10 @@ namespace TrabajoPracticoPOO.Datos
     {
         private List<Cliente> clientes;
 
-        public RepositorioClientesLinq()
-        {
-            clientes = new List<Cliente>();
-        }
+        //public RepositorioClientesLinq()
+        //{
+        //    clientes = new List<Cliente>();
+        //}
 
         public void AgregarCliente(Cliente cliente)
         {
@@ -49,9 +50,9 @@ namespace TrabajoPracticoPOO.Datos
 
         public List<Cliente> BuscarPorTipo(Type tipo)
         {
-            return clientes.Where(c => c.GetType() == tipo || clientes.GetType().IsSubclassOf(tipo)).ToList();
-        }
+            return clientes.Where(c => c.GetType() == tipo || c.GetType().IsSubclassOf(tipo)).ToList();
 
+        }
         public List<Cliente> ListarTodos()
         {
             return clientes.ToList();
@@ -64,6 +65,19 @@ namespace TrabajoPracticoPOO.Datos
             clientes.Remove(c);
             return true;
         }
+
+        public RepositorioClientesLinq()
+        {
+            clientes = new List<Cliente>();
+            clientes.Add(new SocioComun
+            {
+                nombre = "Fakundo",
+                DNI = "20181209",
+                fechaAlta = DateTime.Today,
+                localidad = Localidad.Lobos,
+                servicio = Servicio.Gimnasio,
+            });
+        }    
     }
 }
 

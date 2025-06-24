@@ -48,79 +48,76 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(43, 29);
+            label1.Location = new Point(38, 22);
             label1.Name = "label1";
-            label1.Size = new Size(139, 20);
+            label1.Size = new Size(110, 15);
             label1.TabIndex = 0;
             label1.Text = "Nombre y Apellido:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(135, 97);
+            label2.Location = new Point(118, 73);
             label2.Name = "label2";
-            label2.Size = new Size(38, 20);
+            label2.Size = new Size(30, 15);
             label2.TabIndex = 0;
             label2.Text = "DNI:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(66, 171);
+            label3.Location = new Point(58, 128);
             label3.Name = "label3";
-            label3.Size = new Size(113, 20);
+            label3.Size = new Size(90, 15);
             label3.TabIndex = 0;
             label3.Text = "Tipo de Cliente:";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(99, 229);
+            label4.Location = new Point(87, 172);
             label4.Name = "label4";
-            label4.Size = new Size(77, 20);
+            label4.Size = new Size(61, 15);
             label4.TabIndex = 0;
             label4.Text = "Localidad:";
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(190, 25);
-            txtNombre.Margin = new Padding(3, 4, 3, 4);
+            txtNombre.Location = new Point(166, 19);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(310, 27);
+            txtNombre.Size = new Size(272, 23);
             txtNombre.TabIndex = 1;
             // 
             // txtDNI
             // 
-            txtDNI.Location = new Point(190, 93);
-            txtDNI.Margin = new Padding(3, 4, 3, 4);
+            txtDNI.Location = new Point(166, 70);
             txtDNI.Name = "txtDNI";
-            txtDNI.Size = new Size(310, 27);
+            txtDNI.Size = new Size(272, 23);
             txtDNI.TabIndex = 2;
             // 
             // tipoClienteCbo
             // 
+            tipoClienteCbo.DropDownStyle = ComboBoxStyle.DropDownList;
             tipoClienteCbo.FormattingEnabled = true;
-            tipoClienteCbo.Location = new Point(190, 167);
-            tipoClienteCbo.Margin = new Padding(3, 4, 3, 4);
+            tipoClienteCbo.Location = new Point(166, 125);
             tipoClienteCbo.Name = "tipoClienteCbo";
-            tipoClienteCbo.Size = new Size(310, 28);
+            tipoClienteCbo.Size = new Size(272, 23);
             tipoClienteCbo.TabIndex = 3;
             // 
             // localidadCbo
             // 
+            localidadCbo.DropDownStyle = ComboBoxStyle.DropDownList;
             localidadCbo.FormattingEnabled = true;
-            localidadCbo.Location = new Point(190, 225);
-            localidadCbo.Margin = new Padding(3, 4, 3, 4);
+            localidadCbo.Location = new Point(166, 169);
             localidadCbo.Name = "localidadCbo";
-            localidadCbo.Size = new Size(310, 28);
+            localidadCbo.Size = new Size(272, 23);
             localidadCbo.TabIndex = 4;
             // 
             // btnOK
             // 
-            btnOK.Location = new Point(43, 377);
-            btnOK.Margin = new Padding(3, 4, 3, 4);
+            btnOK.Location = new Point(38, 283);
             btnOK.Name = "btnOK";
-            btnOK.Size = new Size(110, 111);
+            btnOK.Size = new Size(96, 83);
             btnOK.TabIndex = 5;
             btnOK.Text = "OK";
             btnOK.UseVisualStyleBackColor = true;
@@ -128,13 +125,13 @@
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(391, 377);
-            btnCancelar.Margin = new Padding(3, 4, 3, 4);
+            btnCancelar.Location = new Point(342, 283);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(110, 111);
+            btnCancelar.Size = new Size(96, 83);
             btnCancelar.TabIndex = 5;
             btnCancelar.Text = "CANCELAR";
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // errorProvider1
             // 
@@ -143,25 +140,26 @@
             // dtpFechaAlta
             // 
             dtpFechaAlta.Format = DateTimePickerFormat.Short;
-            dtpFechaAlta.Location = new Point(190, 289);
+            dtpFechaAlta.Location = new Point(166, 217);
+            dtpFechaAlta.Margin = new Padding(3, 2, 3, 2);
             dtpFechaAlta.Name = "dtpFechaAlta";
-            dtpFechaAlta.Size = new Size(110, 27);
+            dtpFechaAlta.Size = new Size(97, 23);
             dtpFechaAlta.TabIndex = 6;
             // 
             // fechaAltaLbl
             // 
             fechaAltaLbl.AutoSize = true;
-            fechaAltaLbl.Location = new Point(73, 294);
+            fechaAltaLbl.Location = new Point(64, 220);
             fechaAltaLbl.Name = "fechaAltaLbl";
-            fechaAltaLbl.Size = new Size(100, 20);
+            fechaAltaLbl.Size = new Size(79, 15);
             fechaAltaLbl.TabIndex = 7;
             fechaAltaLbl.Text = "Fecha de alta:";
             // 
             // frmGimnasioAE
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 600);
+            ClientSize = new Size(800, 450);
             Controls.Add(fechaAltaLbl);
             Controls.Add(dtpFechaAlta);
             Controls.Add(btnCancelar);
@@ -174,7 +172,6 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "frmGimnasioAE";
             Text = "frmGimnasioAE";
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();

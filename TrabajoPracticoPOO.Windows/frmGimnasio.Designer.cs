@@ -34,7 +34,7 @@
             tsbEditar = new ToolStripButton();
             tsbBorrar = new ToolStripButton();
             tsbActualizar = new ToolStripButton();
-            tsbFiltrar = new ToolStripButton();
+            cboFiltrar = new ToolStripComboBox();
             toolStripSeparator1 = new ToolStripSeparator();
             tsbSalir = new ToolStripButton();
             dgvDatos = new DataGridView();
@@ -50,10 +50,10 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new Size(20, 20);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { tsbAgregar, tsbEditar, tsbBorrar, tsbActualizar, tsbFiltrar, toolStripSeparator1, tsbSalir });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { tsbAgregar, tsbEditar, tsbBorrar, tsbActualizar, cboFiltrar, toolStripSeparator1, tsbSalir });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(914, 47);
+            toolStrip1.Size = new Size(800, 42);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -62,7 +62,7 @@
             tsbAgregar.Image = (Image)resources.GetObject("tsbAgregar.Image");
             tsbAgregar.ImageTransparentColor = Color.Magenta;
             tsbAgregar.Name = "tsbAgregar";
-            tsbAgregar.Size = new Size(79, 44);
+            tsbAgregar.Size = new Size(63, 39);
             tsbAgregar.Text = "AGREGAR";
             tsbAgregar.TextImageRelation = TextImageRelation.ImageAboveText;
             tsbAgregar.Click += tsbAgregar_Click;
@@ -72,7 +72,7 @@
             tsbEditar.Image = (Image)resources.GetObject("tsbEditar.Image");
             tsbEditar.ImageTransparentColor = Color.Magenta;
             tsbEditar.Name = "tsbEditar";
-            tsbEditar.Size = new Size(62, 44);
+            tsbEditar.Size = new Size(49, 39);
             tsbEditar.Text = "EDITAR";
             tsbEditar.TextImageRelation = TextImageRelation.ImageAboveText;
             tsbEditar.Click += tsbEditar_Click;
@@ -82,7 +82,7 @@
             tsbBorrar.Image = (Image)resources.GetObject("tsbBorrar.Image");
             tsbBorrar.ImageTransparentColor = Color.Magenta;
             tsbBorrar.Name = "tsbBorrar";
-            tsbBorrar.Size = new Size(70, 44);
+            tsbBorrar.Size = new Size(56, 39);
             tsbBorrar.Text = "BORRAR";
             tsbBorrar.TextImageRelation = TextImageRelation.ImageAboveText;
             tsbBorrar.Click += tsbBorrar_Click;
@@ -92,32 +92,30 @@
             tsbActualizar.Image = (Image)resources.GetObject("tsbActualizar.Image");
             tsbActualizar.ImageTransparentColor = Color.Magenta;
             tsbActualizar.Name = "tsbActualizar";
-            tsbActualizar.Size = new Size(99, 44);
+            tsbActualizar.Size = new Size(81, 39);
             tsbActualizar.Text = "ACTUALIZAR";
             tsbActualizar.TextImageRelation = TextImageRelation.ImageAboveText;
             tsbActualizar.Click += tsbActualizar_Click;
             // 
-            // tsbFiltrar
+            // cboFiltrar
             // 
-            tsbFiltrar.Image = (Image)resources.GetObject("tsbFiltrar.Image");
-            tsbFiltrar.ImageTransparentColor = Color.Magenta;
-            tsbFiltrar.Name = "tsbFiltrar";
-            tsbFiltrar.Size = new Size(66, 44);
-            tsbFiltrar.Text = "FILTRAR";
-            tsbFiltrar.TextImageRelation = TextImageRelation.ImageAboveText;
-            tsbFiltrar.Click += tsbFiltrar_Click;
+            cboFiltrar.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboFiltrar.Name = "cboFiltrar";
+            cboFiltrar.Size = new Size(75, 42);
+            cboFiltrar.TextImageRelation = TextImageRelation.ImageAboveText;
+            cboFiltrar.Click += tsbFiltrar_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(6, 47);
+            toolStripSeparator1.Size = new Size(6, 42);
             // 
             // tsbSalir
             // 
             tsbSalir.Image = (Image)resources.GetObject("tsbSalir.Image");
             tsbSalir.ImageTransparentColor = Color.Magenta;
             tsbSalir.Name = "tsbSalir";
-            tsbSalir.Size = new Size(51, 44);
+            tsbSalir.Size = new Size(41, 39);
             tsbSalir.Text = "SALIR";
             tsbSalir.TextImageRelation = TextImageRelation.ImageAboveText;
             tsbSalir.Click += tsbSalir_Click;
@@ -130,13 +128,12 @@
             dgvDatos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDatos.Columns.AddRange(new DataGridViewColumn[] { colNombre, colDNI, colTipoCliente, colLocalidad, ColFechaAlta });
             dgvDatos.Dock = DockStyle.Fill;
-            dgvDatos.Location = new Point(0, 47);
-            dgvDatos.Margin = new Padding(3, 4, 3, 4);
+            dgvDatos.Location = new Point(0, 42);
             dgvDatos.MultiSelect = false;
             dgvDatos.Name = "dgvDatos";
             dgvDatos.RowHeadersWidth = 51;
             dgvDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvDatos.Size = new Size(914, 553);
+            dgvDatos.Size = new Size(800, 408);
             dgvDatos.TabIndex = 1;
             // 
             // colNombre
@@ -188,12 +185,11 @@
             // 
             // frmGimnasio
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 600);
+            ClientSize = new Size(800, 450);
             Controls.Add(dgvDatos);
             Controls.Add(toolStrip1);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "frmGimnasio";
             Text = "frmGimnasio";
             Load += frmGimnasio_Load;
@@ -211,7 +207,6 @@
         private ToolStripButton tsbEditar;
         private ToolStripButton tsbBorrar;
         private ToolStripButton tsbActualizar;
-        private ToolStripButton tsbFiltrar;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripButton tsbSalir;
         private DataGridView dgvDatos;
@@ -220,5 +215,6 @@
         private DataGridViewTextBoxColumn colTipoCliente;
         private DataGridViewTextBoxColumn colLocalidad;
         private DataGridViewTextBoxColumn ColFechaAlta;
+        private ToolStripComboBox cboFiltrar;
     }
 }
