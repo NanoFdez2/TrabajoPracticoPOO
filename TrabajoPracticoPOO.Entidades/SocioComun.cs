@@ -17,8 +17,8 @@ namespace TrabajoPracticoPOO.Entidades
         : base(nombre, dni, fechaAlta, localidad, serv)
         {
             costoMembresia = 35000;
-            cantidadDias = 3; // 3 veces por semana
-            servicio = Servicio.Gimnasio; // Siempre acceso solo al gimnasio
+            cantidadDias = 3;
+            servicio = Servicio.Gimnasio;
         }
         public override decimal CalcularGastoMensual()
         {

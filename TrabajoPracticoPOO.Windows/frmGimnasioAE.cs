@@ -22,10 +22,8 @@ namespace TrabajoPracticoPOO.Windows
         public frmGimnasioAE()
         {
             InitializeComponent();
-            // Cargar Localidades
             UtilidadesWindows.CargarCombo(localidadCbo, Enum.GetValues(typeof(Localidad)).Cast<Localidad>().ToList());
 
-            // Cargar Servicios
             UtilidadesWindows.CargarCombo(tipoClienteCbo, new List<string> { "SocioComun", "SocioPremium", "SocioCorporativo" });
 
 
@@ -35,7 +33,7 @@ namespace TrabajoPracticoPOO.Windows
         {
             InitializeComponent();
             this.cliente = cliente;
-            CargarCliente(cliente);  // Cargar los datos del cliente para editar
+            CargarCliente(cliente);
         }
 
 
@@ -90,7 +88,6 @@ namespace TrabajoPracticoPOO.Windows
                 }
                 else
                 {
-                    // Editar cliente existente
                     cliente.nombre = txtNombre.Text.Trim();
                     cliente.DNI = txtDNI.Text.Trim();
                     cliente.localidad = (Localidad)localidadCbo.SelectedItem;
@@ -98,7 +95,6 @@ namespace TrabajoPracticoPOO.Windows
                     cliente.fechaAlta = dtpFechaAlta.Value;
                 }
 
-                // Validación final
                 var context = new ValidationContext(cliente);
                 var errores = new List<ValidationResult>();
                 var isValid = Validator.TryValidateObject(cliente, context, errores, true);
