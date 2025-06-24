@@ -96,27 +96,27 @@ namespace TrabajoPracticoPOO.Windows
 
         private void tsbBorrar_Click(object sender, EventArgs e)
         {
-            if (dgvDatos.CurrentRow == null)
-            {
-                MessageBox.Show("Elija una fila para borrar!");
-                return;
-            }
-            string dni = dgvDatos.CurrentRow.Cells["colDNI"].Value.ToString()!;
-            string nombre = dgvDatos.CurrentRow.Cells["colNombre"].Value.ToString()!;
+            //if (dgvDatos.CurrentRow == null)
+            //{
+            //    MessageBox.Show("Elija una fila para borrar!");
+            //    return;
+            //}
+            //string dni = dgvDatos.CurrentRow.Cells["colDNI"].Value.ToString()!;
+            //string nombre = dgvDatos.CurrentRow.Cells["colNombre"].Value.ToString()!;
 
-            var resultado = MessageBox.Show(
-                $"¿Seguro que desea borrar a {nombre}?",
-                "Confirmar borrado",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning);
+            //var resultado = MessageBox.Show(
+            //    $"¿Seguro que desea borrar a {nombre}?",
+            //    "Confirmar borrado",
+            //    MessageBoxButtons.YesNo,
+            //    MessageBoxIcon.Warning);
 
-            if (resultado == DialogResult.Yes)
-            {
-                if (RepositorioClientesLinq.EliminarCliente(dni))
-                    ActualizarGrilla();
-                else
-                    MessageBox.Show("Vehículo no encontrado.");
-            }
+            //if (resultado == DialogResult.Yes)
+            //{
+            //    if (RepositorioClientesLinq.EliminarCliente(dni))
+            //        ActualizarGrilla();
+            //    else
+            //        MessageBox.Show("Vehículo no encontrado.");
+            //}
         }
 
         private void tsbActualizar_Click(object sender, EventArgs e)
