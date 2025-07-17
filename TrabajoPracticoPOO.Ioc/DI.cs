@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using TrabajoPracticoPOO.Datos;
+using TrabajoPracticoPOO.Servicios;
 
 namespace TrabajoPracticoPOO.Ioc
 {
@@ -8,8 +10,8 @@ namespace TrabajoPracticoPOO.Ioc
         {
             var servicios = new ServiceCollection();
 
-            servicios.AddScoped<IrepositorioClientes, RepositorioClientesLinq>();
-            servicios.AddScoped<IservicioClientes, ServicioClientes>();
+            servicios.AddScoped<IRepositorioClientes, RepositorioClientesLinq>();
+            servicios.AddScoped<IServiceCliente, ServiceCliente>();
 
             return servicios.BuildServiceProvider();
         }

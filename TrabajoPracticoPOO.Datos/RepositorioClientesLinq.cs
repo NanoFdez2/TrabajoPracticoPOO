@@ -69,10 +69,6 @@ namespace TrabajoPracticoPOO.Datos
 
         public bool Existe(string dni)=>this[dni] != null;
 
-        public bool Existe(object codigo)
-        {
-            throw new NotImplementedException();
-        }
 
         public RepositorioClientesLinq()
         {

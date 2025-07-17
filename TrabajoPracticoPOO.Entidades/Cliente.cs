@@ -38,7 +38,10 @@ namespace TrabajoPracticoPOO.Entidades
             servicio = serv;
         }
 
-
+        public virtual string MostrarDatos()
+        {
+            return $"Nombre: {nombre}, DNI: {DNI}, Fecha de Alta: {fechaAlta.ToShortDateString()}, Localidad: {localidad}, Servicio: {servicio}";
+        }
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (string.IsNullOrWhiteSpace(nombre))
