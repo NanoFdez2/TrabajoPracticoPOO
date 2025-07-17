@@ -3,7 +3,7 @@ using TrabajoPracticoPOO.Entidades;
 
 namespace TrabajoPracticoPOO.Datos
 {
-    public class RepositorioClientesLinq
+    public class RepositorioClientesLinq:IRepositorioClientes
     {
         private List<Cliente> clientes;
         public void AgregarCliente(Cliente cliente)
