@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrabajoPracticoPOO.Utilidad
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrabajoPracticoPOO.Ioc", "TrabajoPracticoPOO.Ioc\TrabajoPracticoPOO.Ioc.csproj", "{D87E0EEC-DE4F-4F94-B739-3BB288EADEE9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrabajoPracticoPOO.Servicios", "TrabajoPracticoPOO.Servicios\TrabajoPracticoPOO.Servicios.csproj", "{1F11C9BD-CB38-4588-8116-E8FA9A0D1695}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{D87E0EEC-DE4F-4F94-B739-3BB288EADEE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D87E0EEC-DE4F-4F94-B739-3BB288EADEE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D87E0EEC-DE4F-4F94-B739-3BB288EADEE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F11C9BD-CB38-4588-8116-E8FA9A0D1695}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F11C9BD-CB38-4588-8116-E8FA9A0D1695}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F11C9BD-CB38-4588-8116-E8FA9A0D1695}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F11C9BD-CB38-4588-8116-E8FA9A0D1695}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

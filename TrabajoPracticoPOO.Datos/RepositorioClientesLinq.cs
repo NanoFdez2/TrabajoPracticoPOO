@@ -6,6 +6,13 @@ namespace TrabajoPracticoPOO.Datos
     public class RepositorioClientesLinq:IRepositorioClientes
     {
         private List<Cliente> clientes;
+        public Cliente? this[string dni]
+        {
+            get
+            {
+                return clientes.FirstOrDefault(c => c.DNI == dni);
+            }
+        }
         public void AgregarCliente(Cliente cliente)
         {
 
@@ -58,6 +65,13 @@ namespace TrabajoPracticoPOO.Datos
             if (c == null) return false;
             clientes.Remove(c);
             return true;
+        }
+
+        public bool Existe(string dni)=>this[dni] != null;
+
+        public bool Existe(object codigo)
+        {
+            throw new NotImplementedException();
         }
 
         public RepositorioClientesLinq()
