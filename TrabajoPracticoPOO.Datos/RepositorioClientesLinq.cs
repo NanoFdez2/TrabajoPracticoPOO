@@ -73,14 +73,6 @@ namespace TrabajoPracticoPOO.Datos
         public RepositorioClientesLinq()
         {
             clientes = new List<Cliente>();
-            clientes.Add(new SocioComun
-            {
-                nombre = "Fakundo",
-                DNI = "20181209",
-                fechaAlta = DateTime.Today,
-                localidad = Localidad.Lobos,
-                servicio = Servicio.Gimnasio,
-            });
         }    
     }
 }

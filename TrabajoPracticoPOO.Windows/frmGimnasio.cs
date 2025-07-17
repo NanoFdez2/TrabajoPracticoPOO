@@ -202,8 +202,11 @@ namespace TrabajoPracticoPOO.Windows
 
         private void frmGimnasio_Load(object sender, EventArgs e)
         {
-
-
+            cboFiltrar.ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboFiltrar.ComboBox.Click += (s, ev) =>
+            {
+                cboFiltrar.ComboBox.SelectAll();
+            };
             gestorLinq = new RepositorioClientesLinq();
             ActualizarGrilla();
             cboFiltrar.Items.Clear();

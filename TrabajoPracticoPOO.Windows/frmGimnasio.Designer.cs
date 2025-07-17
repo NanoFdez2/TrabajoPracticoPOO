@@ -69,6 +69,7 @@
             // 
             // tsbEditar
             // 
+            tsbEditar.BackColor = SystemColors.Control;
             tsbEditar.Image = (Image)resources.GetObject("tsbEditar.Image");
             tsbEditar.ImageTransparentColor = Color.Magenta;
             tsbEditar.Name = "tsbEditar";
@@ -101,7 +102,7 @@
             // 
             cboFiltrar.DropDownStyle = ComboBoxStyle.DropDownList;
             cboFiltrar.Name = "cboFiltrar";
-            cboFiltrar.Size = new Size(75, 42);
+            cboFiltrar.Size = new Size(129, 42);
             cboFiltrar.TextImageRelation = TextImageRelation.ImageAboveText;
             cboFiltrar.Click += tsbFiltrar_Click;
             // 
@@ -122,6 +123,7 @@
             // 
             // dgvDatos
             // 
+            dgvDatos.AllowUserToAddRows = false;
             dgvDatos.AllowUserToResizeColumns = false;
             dgvDatos.AllowUserToResizeRows = false;
             dgvDatos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -131,6 +133,7 @@
             dgvDatos.Location = new Point(0, 42);
             dgvDatos.MultiSelect = false;
             dgvDatos.Name = "dgvDatos";
+            dgvDatos.RowHeadersVisible = false;
             dgvDatos.RowHeadersWidth = 51;
             dgvDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvDatos.Size = new Size(800, 408);
@@ -190,6 +193,7 @@
             ClientSize = new Size(800, 450);
             Controls.Add(dgvDatos);
             Controls.Add(toolStrip1);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "frmGimnasio";
             Text = "frmGimnasio";
             Load += frmGimnasio_Load;
