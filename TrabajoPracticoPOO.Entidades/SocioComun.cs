@@ -20,6 +20,11 @@ namespace TrabajoPracticoPOO.Entidades
             cantidadDias = 3;
             servicio = Servicio.Gimnasio;
         }
+
+        public override string MostrarDatos()
+        {
+            return base.MostrarDatos() + $", Costo Membresía: {costoMembresia}, Cantidad de Días: {cantidadDias}, Servicio: {servicio}, Tipo: Socio común";
+        }
         public override decimal CalcularGastoMensual()
         {
             return costoMembresia;

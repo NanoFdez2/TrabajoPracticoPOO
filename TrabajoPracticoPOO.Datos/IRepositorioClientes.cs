@@ -18,6 +18,6 @@ namespace TrabajoPracticoPOO.Datos
         public List<Cliente> BuscarPorTipo(Type tipo);
         public List<Cliente> ListarTodos();
         public bool EliminarCliente(string dni);
-        bool Existe(object codigo);
+        bool Existe(string dni);
     }
 }

@@ -1,18 +1,24 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System.ComponentModel.DataAnnotations;
 using TrabajoPracticoPOO.Entidades;
+using TrabajoPracticoPOO.Ioc;
+using TrabajoPracticoPOO.Servicios;
 using TrabajoPracticoPOO.Utilidades;
 
 namespace TrabajoPracticoPOO.Consola
 {
     internal class Program
     {
-            
-            static List<Cliente> clientes = new List<Cliente>();
 
-            static void Main()
+        //static List<Cliente> clientes = new List<Cliente>();
+        private static IServiceProvider? serviceProvider;
+        private static IServiceCliente? servicioCliente;
+
+        static void Main()
             {
-
-            clientes.Add(new SocioPremium { nombre = "Eustaquio", DNI = "20181209", fechaAlta = new DateTime(2023, 3, 10), localidad = Localidad.Lobos });
+            serviceProvider = DI.Configurar();
+            servicioCliente = serviceProvider.GetRequiredService<IServiceCliente>();
+            //clientes.Add(new SocioPremium { nombre = "Eustaquio", DNI = "20181209", fechaAlta = new DateTime(2023, 3, 10), localidad = Localidad.Lobos });
 
             int opcion;
             do
@@ -70,7 +76,8 @@ namespace TrabajoPracticoPOO.Consola
             Console.WriteLine("Alta Cliente");
             string dni = ExtensionesConsola.PedirDni("Ingrese DNI: ").ToString();
 
-            if (clientes.Any(c => c.DNI == dni))
+             var existe = servicioCliente!.BuscarPorNombre(dni).EsValido == false;
+            if (!existe)
             {
                 Console.WriteLine("Ya existe un cliente con ese DNI.");
                 return;
@@ -102,43 +109,34 @@ namespace TrabajoPracticoPOO.Consola
             nuevoCliente.DNI = dni;
             nuevoCliente.nombre = nombre;
             nuevoCliente.fechaAlta = fechaAlta;
-
             nuevoCliente.localidad = ExtensionesConsola.SeleccionarEnum<Localidad>(
                 "Localidades disponibles: ", "Seleccione la localidad: ");
 
-            var resultados = nuevoCliente.Validate(new ValidationContext(nuevoCliente));
-            bool esValido = true;
-            foreach (var error in resultados)
+            var resultado = servicioCliente.Agregar(nuevoCliente);
+            if (!resultado.EsValido)
             {
-                Console.WriteLine("Error: " + error.ErrorMessage);
-                esValido = false;
-            }
-            if (!esValido)
+                foreach (var error in resultado.Errores)
+                    Console.WriteLine("Error: " + error);
                 return;
+            }
 
-            clientes.Add(nuevoCliente);
             Console.WriteLine("Cliente agregado!!!");
         }
 
         static void BajaCliente()
         {
             string dni = ExtensionesConsola.PedirDni("Ingrese el DNI del cliente a eliminar: ").ToString();
-            var cliente = clientes.FirstOrDefault(c => c.DNI == dni);
-            if (cliente != null)
-            {
-                clientes.Remove(cliente);
+            var resultado = servicioCliente!.EliminarCliente(dni);
+            if (resultado.EsValido)
                 Console.WriteLine("Cliente eliminado!!!");
-            }
             else
-            {
-                Console.WriteLine("Cliente no encontrado!");
-            }
+                Console.WriteLine(string.Join(", ", resultado.Errores));
         }
 
         static void ModificarCliente()
         {
-            string dni = ExtensionesConsola.PedirDni("Ingrese el DNI del cliente a modificar: ").ToString();
-            var cliente = clientes.FirstOrDefault(c => c.DNI == dni);
+             string dni = ExtensionesConsola.PedirDni("Ingrese el DNI del cliente a modificar: ").ToString();
+            var cliente = servicioCliente!.ListarTodos().FirstOrDefault(c => c.DNI == dni);
             if (cliente == null)
             {
                 Console.WriteLine("Cliente no encontrado.");
@@ -147,10 +145,7 @@ namespace TrabajoPracticoPOO.Consola
 
             string nuevoNombre = ExtensionesConsola.PedirString("Nuevo nombre (dejar en blanco para no modificar): ", false);
             if (!string.IsNullOrWhiteSpace(nuevoNombre))
-            {
                 cliente.nombre = nuevoNombre;
-            }
-               
 
             string nuevaFechaStr = ExtensionesConsola.PedirString("Nueva fecha de alta (yyyy-mm-dd, dejar en blanco para no modificar): ", false);
             if (!string.IsNullOrWhiteSpace(nuevaFechaStr))
@@ -164,30 +159,34 @@ namespace TrabajoPracticoPOO.Consola
             cliente.localidad = ExtensionesConsola.SeleccionarEnum<Localidad>(
                 "Localidades disponibles:", "Seleccione la localidad: ");
 
+              servicioCliente.EliminarCliente(dni);
+            var resultado = servicioCliente.Agregar(cliente);
+            if (!resultado.EsValido)
+            {
+                foreach (var error in resultado.Errores)
+                    Console.WriteLine("Error: " + error);
+                return;
+            }
+
             Console.WriteLine("Cliente modificado correctamente!!!");
         }
 
         static void BuscarCliente()
         {
             string dni = ExtensionesConsola.PedirDni("Ingrese el DNI del cliente: ").ToString();
-            var cliente = clientes.FirstOrDefault(c => c.DNI == dni);
+            var cliente = servicioCliente!.ListarTodos().FirstOrDefault(c => c.DNI == dni);
             if (cliente != null)
-            {
                 MostrarCliente(cliente);
-            }
             else
-            {
                 Console.WriteLine("Cliente no encontrado.");
-            }
         }
 
         static void ListarClientes()
         {
-            Console.WriteLine("Lista Clientes");
-            foreach (var cliente in clientes)
-            {
-                MostrarCliente(cliente);
-            }
+            Console.Clear();
+            Console.WriteLine("Lista de clientes");
+            foreach (var item in servicioCliente!.ListarTodos())
+                Console.WriteLine(item.MostrarDatos());
         }
 
         static void FiltrarPorTipo()
@@ -208,11 +207,9 @@ namespace TrabajoPracticoPOO.Consola
                 return;
             }
 
-            var filtrados = clientes.Where(c => c.GetType() == tipoSeleccionado);
+            var filtrados = servicioCliente!.BuscarPorTipo(tipoSeleccionado);
             foreach (var c in filtrados)
-            {
                 MostrarCliente(c);
-            }
         }
 
         static void MostrarCliente(Cliente c)
