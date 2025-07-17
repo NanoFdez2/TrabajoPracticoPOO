@@ -22,25 +22,30 @@ namespace TrabajoPracticoPOO.Entidades
         public Localidad localidad { get; set; }
         public Servicio servicio { get; set; }
 
-        public abstract decimal CalcularGastoMensual();
+        public virtual decimal CalcularGastoMensual()
+        {
+            return costoMembresia;
+        }
 
         protected Cliente()
         {
-            
+
         }
 
-        public Cliente(string Nombre, string dni, DateTime FechaAlta, Localidad ciudad, Servicio serv)
+        public Cliente(string Nombre, string dni, DateTime FechaAlta, Localidad ciudad, Servicio serv, decimal CostoMembresia, int CantidadDias)
         {
             nombre = Nombre;
             DNI = dni;
             fechaAlta = FechaAlta;
             localidad = ciudad;
             servicio = serv;
+            cantidadDias = CantidadDias;
+            costoMembresia = 35000m;
         }
 
         public virtual string MostrarDatos()
         {
-            return $"Nombre: {nombre}, DNI: {DNI}, Fecha de Alta: {fechaAlta.ToShortDateString()}, Localidad: {localidad}, Servicio: {servicio}";
+            return $"Nombre: {nombre}, DNI: {DNI}, Fecha de Alta: {fechaAlta.ToShortDateString()}, Localidad: {localidad}";
         }
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

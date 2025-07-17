@@ -138,13 +138,14 @@ namespace TrabajoPracticoPOO.Windows
                 return;
             }
 
-
-             frmGimnasioAE frm = new frmGimnasioAE();
+            frmGimnasioAE frm = new frmGimnasioAE();
             frm.CargarCliente(cliente);
 
             if (frm.ShowDialog() == DialogResult.OK)
             {
-
+                Cliente clienteEditado = frm.GetCliente();
+                gestorLinq.EliminarCliente(dni);
+                gestorLinq.AgregarCliente(clienteEditado);
                 ActualizarGrilla();
                 MessageBox.Show("Datos actualizados correctamente.");
             }
@@ -202,8 +203,11 @@ namespace TrabajoPracticoPOO.Windows
 
         private void frmGimnasio_Load(object sender, EventArgs e)
         {
-
-
+            cboFiltrar.ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboFiltrar.ComboBox.Click += (s, ev) =>
+            {
+                cboFiltrar.ComboBox.SelectAll();
+            };
             gestorLinq = new RepositorioClientesLinq();
             ActualizarGrilla();
             cboFiltrar.Items.Clear();
