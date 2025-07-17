@@ -63,27 +63,27 @@ namespace TrabajoPracticoPOO.Datos
             }
         }
 
-        public void MostrarTodo()
-        {
-            if (clientes.Count == 0)
-            {
-                Console.WriteLine("No hay clientes en la lista aún.");
-                return;
-            }
+        //public void MostrarTodo()
+        //{
+        //    if (clientes.Count == 0)
+        //    {
+        //        Console.WriteLine("No hay clientes en la lista aún.");
+        //        return;
+        //    }
 
-            foreach (var cliente in clientes)
-            {
-                Console.WriteLine($"Nombre: {cliente.nombre}, DNI: {cliente.DNI}, TipoCliente: {cliente.GetType().Name}, Servicio: {cliente.servicio}, Pago: ${cliente.CalcularGastoMensual()}");
-            }
-        }
+        //    foreach (var cliente in clientes)
+        //    {
+        //        Console.WriteLine($"Nombre: {cliente.nombre}, DNI: {cliente.DNI}, TipoCliente: {cliente.GetType().Name}, Servicio: {cliente.servicio}, Pago: ${cliente.CalcularGastoMensual()}");
+        //    }
+        //}
 
-        public Cliente BuscarPorDNI(string dni)
-        {
-            return clientes.FirstOrDefault(c => c.DNI == dni);
-        }
-        public int Cantidad => clientes.Count;
+        //public Cliente BuscarPorDNI(string dni)
+        //{
+        //    return clientes.FirstOrDefault(c => c.DNI == dni);
+        //}
+        //public int Cantidad => clientes.Count;
 
-        public List<Cliente> ObtenerTodos() => new List<Cliente>(clientes);
+        //public List<Cliente> ObtenerTodos() => new List<Cliente>(clientes);
     }
 
 

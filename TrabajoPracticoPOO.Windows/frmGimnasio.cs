@@ -138,13 +138,14 @@ namespace TrabajoPracticoPOO.Windows
                 return;
             }
 
-
-             frmGimnasioAE frm = new frmGimnasioAE();
+            frmGimnasioAE frm = new frmGimnasioAE();
             frm.CargarCliente(cliente);
 
             if (frm.ShowDialog() == DialogResult.OK)
             {
-
+                Cliente clienteEditado = frm.GetCliente();
+                gestorLinq.EliminarCliente(dni);
+                gestorLinq.AgregarCliente(clienteEditado);
                 ActualizarGrilla();
                 MessageBox.Show("Datos actualizados correctamente.");
             }

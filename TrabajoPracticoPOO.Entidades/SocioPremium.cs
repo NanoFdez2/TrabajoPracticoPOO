@@ -10,22 +10,18 @@ namespace TrabajoPracticoPOO.Entidades
     {
         public SocioPremium()
         {
-            
-        }
-        public SocioPremium(string nombre, string dni, DateTime fechaAlta, Localidad localidad, Servicio serv)
-            : base(nombre, dni, fechaAlta, localidad, serv)
-        {
-            costoMembresia = 35000 + 10000;
             cantidadDias = 5;
+            costoMembresia = 35000;
             servicio = Servicio.GimnasioTrainer;
         }
+
         public override string MostrarDatos()
         {
-            return base.MostrarDatos()+ $", Costo Membresía: {costoMembresia}, Cantidad de Días: {cantidadDias}, Servicio: {servicio}, Tipo: Socio Premium";
+            return base.MostrarDatos()+ $", Costo Membresía: {CalcularGastoMensual()}, Cantidad de Días: {cantidadDias}, Servicio: {servicio}, Tipo: Socio Premium";
         }
         public override decimal CalcularGastoMensual()
         {
-            return costoMembresia;
+            return costoMembresia + 10000;
         }
     }
 }

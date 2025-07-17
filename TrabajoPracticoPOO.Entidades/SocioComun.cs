@@ -8,22 +8,16 @@ namespace TrabajoPracticoPOO.Entidades
 {
     public class SocioComun : Cliente
     {
-
         public SocioComun()
         {
-            
-        }
-        public SocioComun(string nombre, string dni, DateTime fechaAlta, Localidad localidad, Servicio serv)
-        : base(nombre, dni, fechaAlta, localidad, serv)
-        {
-            costoMembresia = 35000;
             cantidadDias = 3;
+            costoMembresia = 35000;
             servicio = Servicio.Gimnasio;
         }
 
         public override string MostrarDatos()
         {
-            return base.MostrarDatos() + $", Costo Membresía: {costoMembresia}, Cantidad de Días: {cantidadDias}, Servicio: {servicio}, Tipo: Socio común";
+            return base.MostrarDatos() + $", Costo Membresía: {CalcularGastoMensual()}, Cantidad de Días: {cantidadDias} , Servicio: Gimnasio, Tipo: Socio común";
         }
         public override decimal CalcularGastoMensual()
         {
